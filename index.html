@@ -20,7 +20,7 @@
             margin: 0;
         }
         </style>
-        <title></title>
+        <title>Peta Titik Banjir Kota Bengkulu</title>
     </head>
     <body>
         <div id="map">
@@ -206,6 +206,31 @@
 
         bounds_group.addLayer(layer_asesmen_banjir_1);
         cluster_asesmen_banjir_1.addTo(map);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>Peta Titik Banjir Kota Bengkulu</h2>';
+            };
+            title.addTo(map);
+            var abstract = new L.Control({'position':'bottomleft'});
+            abstract.onAdd = function (map) {
+                this._div = L.DomUtil.create('div',
+                'leaflet-control abstract');
+                this._div.id = 'abstract'
+
+                    abstract.show();
+                    return this._div;
+                };
+                abstract.show = function () {
+                    this._div.classList.remove("abstract");
+                    this._div.classList.add("abstractUncollapsed");
+                    this._div.innerHTML = 'Informasi titik kejadian banjir berdasarkan tim asesment Palang Merah Indonesia Provinsi Bengkulu';
+            };
+            abstract.addTo(map);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
